@@ -1,29 +1,24 @@
+def get_value_types(d):
+    result = {}
+    for key, value in d.items():
+        if isinstance(value, dict):
+            result[key] = get_value_types(value)
+        else:
+            result[key] = type(value)
+    return result
+
 # Словник 1
-master_key = {
-    "key_1": "text",
-    "key_2": 123,
-    "key_3": {
-        "dubbed_key_1": "test_1",
-        "dubbed_key_2": 12.34,
-        "list_key_3": [1, 2, 3],
-        "dubbed_key_4": {"str": "int"},
-        "dubbed_key_5": True
+dict_1 = {
+    "first_key": "first_value",
+    "second_key": 123,
+    "third_key": {
+        "sub_key1": "sub_value1",
+        "sub_key2": 45.67,
+        "sub_key3": [1, 2, 3],
+        "sub_key4": {"nested_key": "nested_value"},
+        "sub_key5": True
     },
-    "massive_key": [10, 20, 30]
+    "fourth_key": [10, 20, 30]
 }
-types_key = {
-"key_1": str,
-    "key_2": int,
-    "key_3": {
-        "dubbed_key_1": str,
-        "dubbed_key_2": float,
-        "list_key_3": list,
-        "dubbed_key_4": dict,
-        "dubbed_key_5": bool,
-    },
-    "list_key": list
-}
-
-print(master_key)
-print(types_key)
-
+dict_types = get_value_types(dict_1)
+print(dict_types)
